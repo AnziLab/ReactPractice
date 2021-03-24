@@ -1,28 +1,41 @@
-import React, {Component} from 'react';
+import React, { useState } from "react";
 
-class EventPractice extends Component{
+const EventPractice = () => {
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const onChangeUsername = (e) => setUsername(e.target.value);
+  const onChangeMessage = (e) => setMessage(e.target.value);
+  const onClick = () => {
+    alert(username + ": " + message);
+    setUsername("");
+    setMessage("");
+  };
+  const onKeyPress = e =>{
+      if(e.key === 'Enter'){
+          onClick();
+      }
+  };
 
-    state ={
-        message:''
-    }
-    render(){
-        return(
-            <div>   
-                <h1> EventPractice </h1>
-                <input
-                type="text"
-                name="message"
-                placeholder="write anything"
-                value={this.state.message}
-                onChange={
-                    (e)=>{
-                        console.log(e.target.value);
-                    }
-                }
-                />
-            </div>
-        );
-    }
-}
+  return (
+      <div>
+          <h1>Event Practice</h1>
+          <input
+          type="text"
+          name="username"
+          placeholder="username"
+          value={username}
+          onChange={onChangeUsername}/>
+
+          <input
+          type="text"
+          name="message"
+          placeholder="write anything"
+          value={message}
+          onChange={onChangeMessage}
+          onKeyPress={onKeyPress}/>
+          <button onClick ={onClick}>confirm</button>
+      </div>
+  );
+};
 
 export default EventPractice;
